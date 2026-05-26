@@ -3,7 +3,6 @@ package com.ThinkAndGetIt.TestCases.Authorization;
 import com.ThinkAndGetIt.Base.BaseTest;
 import org.testng.annotations.Test;
 import static com.ThinkAndGetIt.Routes.EndPoints.User;
-import static com.ThinkAndGetIt.TestCases.Authorization.Login.loginWithEmailAndPassword;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
