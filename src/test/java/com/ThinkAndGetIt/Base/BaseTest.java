@@ -15,11 +15,11 @@ import java.util.Properties;
 public class BaseTest {
     protected static RequestSpecification requestSpec;
     protected static ResponseSpecification responseSpec;
+    public static Properties properties = Utils.loadProperties("src/test/resources/config.properties");
+    public String email = properties.getProperty("email");
 
-    public static Properties properties;
     @BeforeClass
     public void setup() throws IOException {
-        properties = Utils.loadProperties("src/test/resources/config.properties");
 
         requestSpec = new RequestSpecBuilder()
                 .setBaseUri(properties.getProperty("base.url"))
