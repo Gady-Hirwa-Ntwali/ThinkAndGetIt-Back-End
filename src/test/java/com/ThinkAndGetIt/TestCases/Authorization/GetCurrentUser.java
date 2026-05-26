@@ -1,28 +1,24 @@
 package com.ThinkAndGetIt.TestCases.Authorization;
 
 import com.ThinkAndGetIt.Base.BaseTest;
-import com.ThinkAndGetIt.Routes.EndPoints;
 import org.testng.annotations.Test;
-import java.util.HashMap;
+import static com.ThinkAndGetIt.Routes.EndPoints.User;
+import static com.ThinkAndGetIt.TestCases.Authorization.Login.loginWithEmailAndPassword;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class Login extends BaseTest {
-
+public class GetCurrentUser extends BaseTest {
     @Test
-    public static void loginWithEmailAndPassword(){
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("email", "darry@example.com");
-        body.put("password",  "MyPass@123");
+    public void getCurrentUserTest(){
         given()
                 .spec(requestSpec)
-                .body(body)
+                .header("Authorization", "Bearer " + properties.getProperty("token"))
                 .when()
-                .post(EndPoints.Login)
+                .get(User)
                 .then()
                 .spec(responseSpec)
                 .statusCode(200)
-                .log().all()
                 .body("data.user.firstName", equalTo("darry"));
+
     }
 }
