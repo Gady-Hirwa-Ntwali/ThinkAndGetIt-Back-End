@@ -16,7 +16,7 @@ public class BaseTest {
     protected static RequestSpecification requestSpec;
     protected static ResponseSpecification responseSpec;
     public static Properties properties = Utils.loadProperties("src/test/resources/config.properties");
-    public String email = properties.getProperty("email");
+    public static String email = properties.getProperty("email");
 
     @BeforeClass
     public void setup() throws IOException {
