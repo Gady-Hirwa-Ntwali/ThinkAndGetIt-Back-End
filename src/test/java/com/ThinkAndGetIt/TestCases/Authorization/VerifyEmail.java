@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
-import static com.ThinkAndGetIt.Routes.EndPoints.PasswordReset;
-import static com.ThinkAndGetIt.TestCases.Authorization.Login.loginWithEmailAndPassword;
 import static com.ThinkAndGetIt.TestCases.Authorization.RegisterCustomer.registerCustomerTest;
 import static io.restassured.RestAssured.given;
 

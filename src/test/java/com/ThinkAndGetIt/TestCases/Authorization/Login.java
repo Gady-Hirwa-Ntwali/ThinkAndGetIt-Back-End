@@ -20,11 +20,25 @@ import java.util.Properties;
 
 import static com.ThinkAndGetIt.ReusableMethods.LoginMethods.loginTest;
 import static io.restassured.RestAssured.given;
+import static org.testng.Assert.assertEquals;
 
 public class Login extends BaseTest {
 
     @Test
-    public static void loginWithEmailAndPassword() {
-        loginTest(properties.getProperty("email"), properties.getProperty("password"));
+    public static void successfulLogin() {
+        Response response = loginTest(properties.getProperty("email"), properties.getProperty("password"));
+        assertEquals(response.statusCode(), 200);
+        String actualFirstName = response.path("data.user.firstName");
+        assertEquals(actualFirstName, "darry");
+    }
+
+    @Test
+    public void emptyEmailAndPassword(){
+        Response response = loginTest(properties.getProperty(""), properties.getProperty(""));
+        String email = response.path("email");
+        String password = response.path("password");
+        assertEquals(response.statusCode(), 500);
+        assertEquals(email, null);
+        assertEquals(password, null);
     }
 }

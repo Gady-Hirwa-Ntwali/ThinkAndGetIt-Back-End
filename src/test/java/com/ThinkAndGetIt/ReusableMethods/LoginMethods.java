@@ -10,24 +10,19 @@ import static com.ThinkAndGetIt.ReusableMethods.UpdateProperties.updatePropertie
 import static io.restassured.RestAssured.given;
 
 public class LoginMethods extends BaseTest {
-public static void loginTest(String email, String password){
+public static Response loginTest(String email, String password){
     HashMap<String, Object> body = new HashMap<>();
     body.put("email", email);
     body.put("password", password);
 
-    Response response = given()
+    return given()
             .spec(requestSpec)
             .body(body)
             .when()
             .post(EndPoints.Login)
             .then()
             .spec(responseSpec)
-            .statusCode(200)
             .log().all()
             .extract().response();
-
-    String token = response.path("data.token");
-    String refreshToken = response.path("data.refreshToken");
-    updatePropertiesFile(token, refreshToken);
 }
 }
