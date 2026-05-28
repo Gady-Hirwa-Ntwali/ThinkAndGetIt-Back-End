@@ -6,10 +6,9 @@ import io.restassured.response.Response;
 
 import java.util.HashMap;
 
-import static com.ThinkAndGetIt.ReusableMethods.UpdateProperties.updatePropertiesFile;
 import static io.restassured.RestAssured.given;
 
-public class LoginMethods extends BaseTest {
+public class LoginMethod extends BaseTest {
 public static Response loginTest(String email, String password){
     HashMap<String, Object> body = new HashMap<>();
     body.put("email", email);
