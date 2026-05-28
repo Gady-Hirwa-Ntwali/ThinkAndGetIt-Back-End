@@ -20,7 +20,7 @@ import java.util.Properties;
 
 import static com.ThinkAndGetIt.ReusableMethods.LoginMethods.loginTest;
 import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class Login extends BaseTest {
 
@@ -41,4 +41,14 @@ public class Login extends BaseTest {
         assertEquals(email, null);
         assertEquals(password, null);
     }
+    @Test
+    public void invalidEmail(){
+        Response response = loginTest("@jldskjf@T", properties.getProperty("password"));
+        boolean success = response.path("success");
+        String message = response.path("message");
+        assertEquals(response.statusCode(), 401);
+        assertFalse(success);
+        assertEquals(message, "Invalid email or password");
+    }
+
 }
