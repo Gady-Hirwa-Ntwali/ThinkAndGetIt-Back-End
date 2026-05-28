@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 
 import java.util.HashMap;
 
-import static com.ThinkAndGetIt.TestCases.Authorization.Login.updatePropertiesFile;
+import static com.ThinkAndGetIt.ReusableMethods.UpdateProperties.updatePropertiesFile;
 import static io.restassured.RestAssured.given;
 
 public class LoginMethods extends BaseTest {

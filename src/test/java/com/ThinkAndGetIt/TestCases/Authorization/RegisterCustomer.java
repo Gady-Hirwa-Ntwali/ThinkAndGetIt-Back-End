@@ -8,11 +8,9 @@ import org.testng.annotations.Test;
 import java.math.RoundingMode;
 import java.util.HashMap;
 
+import static com.ThinkAndGetIt.ReusableMethods.UpdateProperties.updatePropertiesFile;
 import static com.ThinkAndGetIt.Routes.EndPoints.Register;
-import static com.ThinkAndGetIt.TestCases.Authorization.Login.updatePropertiesFile;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.equalTo;
 
 public class RegisterCustomer extends BaseTest {
 
