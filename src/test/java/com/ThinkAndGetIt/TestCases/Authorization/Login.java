@@ -51,4 +51,16 @@ public class Login extends BaseTest {
         assertEquals(message, "Invalid email or password");
     }
 
+    @Test
+    public void invalidPassword(){
+        Response response = loginTest("email", "dsfkjoekd");
+        boolean success = response.path("success");
+        String message = response.path("message");
+        assertEquals(response.statusCode(), 401);
+        assertFalse(success);
+        assertEquals(message, "Invalid email or password");
+    }
+
+
+
 }
