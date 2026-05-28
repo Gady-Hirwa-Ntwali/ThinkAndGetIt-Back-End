@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class ForgotPasswordMethod extends BaseTest {
 
-    public static Response forgotPassword(){
+    public static Response forgotPassword(String email){
         HashMap<String, String> body = new HashMap<>();
         body.put("email", email);
         return given()
