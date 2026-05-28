@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 
 public class CreateAccountMethod extends BaseTest {
 
-    public Response createAccountMethod (Object payload){
+    public static Response createAccountMethod (Object payload){
         return  given()
                 .spec(requestSpec)
                 .body(payload)
@@ -16,7 +16,6 @@ public class CreateAccountMethod extends BaseTest {
                 .then()
                 .spec(responseSpec)
                 .log().all()
-                .statusCode(201)
                 .extract().response();
     }
 }

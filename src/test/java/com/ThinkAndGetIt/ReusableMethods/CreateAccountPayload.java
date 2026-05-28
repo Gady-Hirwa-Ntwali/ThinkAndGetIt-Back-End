@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public class CreateAccountPayload {
     public static HashMap payload(String email, String password, String fName, String lName, String phone){
-        String dynamicEmail = "gady_" + System.currentTimeMillis() + "@gmail.com";
-
         HashMap<String, Object> payload = new HashMap<>();
         payload.put("email", email);
         payload.put("password", password);

@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
-import static com.ThinkAndGetIt.TestCases.Authorization.RegisterCustomer.registerCustomerTest;
+import static com.ThinkAndGetIt.TestCases.Authorization.RegisterCustomer.successfulRegister;
 import static io.restassured.RestAssured.given;
 
 public class VerifyEmail extends BaseTest {
@@ -15,7 +15,7 @@ public class VerifyEmail extends BaseTest {
         HashMap<String, String> body = new HashMap<>();
         body.put("email", properties.getProperty("email"));
 
-        registerCustomerTest();
+        successfulRegister();
 
         given()
                 .spec(requestSpec)

@@ -1,22 +1,37 @@
 package com.ThinkAndGetIt.TestCases.Authorization;
 
 import com.ThinkAndGetIt.Base.BaseTest;
-import com.ThinkAndGetIt.Routes.EndPoints;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.math.RoundingMode;
 import java.util.HashMap;
 
+import static com.ThinkAndGetIt.ReusableMethods.CreateAccountMethod.createAccountMethod;
 import static com.ThinkAndGetIt.ReusableMethods.CreateAccountPayload.payload;
+import static com.ThinkAndGetIt.ReusableMethods.TestData.*;
 import static com.ThinkAndGetIt.ReusableMethods.UpdateProperties.updatePropertiesFile;
-import static com.ThinkAndGetIt.Routes.EndPoints.Register;
-import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.*;
 
 public class RegisterCustomer extends BaseTest {
 
     @Test
-    public static void registerCustomerTest() {
-        payload();
+    public static void successfulRegister() {
+        Response response = createAccountMethod(payload(DynamicEmail, Password, FName, LName, Phone));
+        assertEquals(response.statusCode(), 201);
+        String token = response.path("data.token");
+        String refreshToken = response.path("data.refreshToken");
+        updatePropertiesFile(token, refreshToken);
+    }
+
+    @Test
+    public void invalidEmailRegister(){
+        Response response = createAccountMethod(payload("@Tmbf@tghdsk", Password, FName, LName, Phone));
+        assertEquals(response.statusCode(), 409);
+        boolean success = response.path("success");
+        String message = response.path("message");
+        assertFalse(success);
+        assertEquals(message, "Email already registered");
     }
 }
