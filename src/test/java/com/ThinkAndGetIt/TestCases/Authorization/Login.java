@@ -18,33 +18,17 @@ import java.util.Properties;
 //-Click happens after delay
 //-Browser stays open after execution
 
+import static com.ThinkAndGetIt.ReusableMethods.LoginMethods.loginTest;
 import static io.restassured.RestAssured.given;
 
 public class Login extends BaseTest {
 
     @Test
     public static void loginWithEmailAndPassword() {
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("email", "darry@example.com");
-        body.put("password", "MyPass@123");
-
-        Response response = given()
-                .spec(requestSpec)
-                .body(body)
-                .when()
-                .post(EndPoints.Login)
-                .then()
-                .spec(responseSpec)
-                .statusCode(200)
-                .log().all()
-                .extract().response();
-
-        String token = response.path("data.token");
-        String refreshToken = response.path("data.refreshToken");
-        updatePropertiesFile(token, refreshToken);
+        loginTest(properties.getProperty("email"), properties.getProperty("password"));
     }
 
-    static void updatePropertiesFile(String token, String refreshToken) {
+    public static void updatePropertiesFile(String token, String refreshToken) {
         String filePath = "src/test/resources/Config.Properties";
         Properties props = new Properties();
 
