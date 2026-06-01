@@ -3,15 +3,10 @@ package com.ThinkAndGetIt.TestCases.Authorization;
 import com.ThinkAndGetIt.Base.BaseTest;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-
-import java.math.RoundingMode;
-import java.util.HashMap;
-
-import static com.ThinkAndGetIt.ReusableMethods.CreateAccountMethod.createAccountMethod;
 import static com.ThinkAndGetIt.ReusableMethods.CreateAccountPayload.payload;
+import static com.ThinkAndGetIt.ReusableMethods.LoginAndRegisterMethods.createAccountMethod;
 import static com.ThinkAndGetIt.ReusableMethods.TestData.*;
 import static com.ThinkAndGetIt.ReusableMethods.UpdateProperties.updatePropertiesFile;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.*;
 
 public class RegisterCustomer extends BaseTest {

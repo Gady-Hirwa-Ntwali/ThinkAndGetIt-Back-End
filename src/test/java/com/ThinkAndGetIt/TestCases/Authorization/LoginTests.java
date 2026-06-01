@@ -11,8 +11,7 @@ import org.testng.annotations.Test;
 //-Click happens after delay
 //-Browser stays open after execution
 
-import static com.ThinkAndGetIt.ReusableMethods.LoginMethod.loginTest;
-import static io.restassured.RestAssured.given;
+import static com.ThinkAndGetIt.ReusableMethods.LoginAndRegisterMethods.loginTest;
 import static org.testng.Assert.*;
 
 public class LoginTests extends BaseTest {

@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import java.util.HashMap;
 
-import static com.ThinkAndGetIt.ReusableMethods.ForgotPasswordMethod.forgotPassword;
+import static com.ThinkAndGetIt.ReusableMethods.LoginAndRegisterMethods.forgotPassword;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
