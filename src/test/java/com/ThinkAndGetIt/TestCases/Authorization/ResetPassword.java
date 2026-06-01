@@ -8,7 +8,8 @@ import static io.restassured.RestAssured.given;
 
 public class ResetPassword extends BaseTest {
     @Test
-    public void forgetPasswordTest(){
+    public void resetPassword(){
+        RegisterCustomer.successfulRegister();
         HashMap<String, String> body = new HashMap<>();
         body.put("password", "GoodGood");
 
@@ -16,7 +17,7 @@ public class ResetPassword extends BaseTest {
                 .spec(requestSpec)
                 .body(body)
                 .when()
-                .post(PasswordReset + properties.getProperty("token"))
+                .post(PasswordReset + "/"+ properties.getProperty("token"))
                 .then()
                 .spec(responseSpec)
                 .log().all()

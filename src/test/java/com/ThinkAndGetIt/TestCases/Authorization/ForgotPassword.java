@@ -6,9 +6,6 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 
 import static com.ThinkAndGetIt.ReusableMethods.ForgotPasswordMethod.forgotPassword;
-import static com.ThinkAndGetIt.Routes.EndPoints.Forgot_Password;
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
