@@ -11,7 +11,11 @@ import static com.ThinkAndGetIt.Routes.EndPoints.Register;
 
 public class LoginAndRegisterMethods extends BaseTest {
     public static Response createAccountMethod (Object payload){
-        return Methods.postMethod(Register, payload);
+        Response response = Methods.postMethod(Register, payload);
+        String token = response.path("data.token");
+        String refreshToken = response.path("data.refreshToken");
+        UpdateProperties.updatePropertiesFile(token, refreshToken);
+        return response;
     }
 
     public static Response loginTest(String email, String password){

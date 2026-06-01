@@ -15,9 +15,6 @@ public class RegisterCustomer extends BaseTest {
     public static void successfulRegister() {
         Response response = createAccountMethod(payload(DynamicEmail, Password, FName, LName, Phone));
         assertEquals(response.statusCode(), 201);
-        String token = response.path("data.token");
-        String refreshToken = response.path("data.refreshToken");
-        updatePropertiesFile(token, refreshToken);
     }
 
     @Test

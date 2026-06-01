@@ -28,5 +28,6 @@ public class Methods extends BaseTest {
                     .spec(responseSpec)
                     .log().all()
                     .extract().response();
+
     }
 }

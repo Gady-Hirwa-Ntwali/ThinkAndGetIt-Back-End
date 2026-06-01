@@ -5,7 +5,6 @@ import com.ThinkAndGetIt.ReusableMethods.Methods;
 import org.testng.annotations.Test;
 import java.util.HashMap;
 import static com.ThinkAndGetIt.Routes.EndPoints.PasswordReset;
-import static io.restassured.RestAssured.given;
 
 public class ResetPassword extends BaseTest {
     @Test
