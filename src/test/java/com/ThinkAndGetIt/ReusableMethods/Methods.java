@@ -87,4 +87,12 @@ public class Methods extends BaseTest {
                 .log().all()
                 .extract().response();
     }
+
+    public static Response DeleteMethod(String targetEndpoint, String token){
+        return given()
+                .spec(requestSpec)
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .delete(targetEndpoint);
+    }
 }
