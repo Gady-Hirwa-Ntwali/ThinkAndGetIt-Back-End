@@ -87,4 +87,12 @@ public class TestData extends BaseTest {
 
         return payload;
     }
+
+    public static Map<String, Object> updateCartItem(int quantity) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("quantity", quantity); // Works perfectly now because the map values are 'Object'
+
+        return payload;
+    }
+
 }

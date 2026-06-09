@@ -1,6 +1,8 @@
 package com.ThinkAndGetIt.Routes;
 
-public class EndPoints {
+import com.ThinkAndGetIt.Base.BaseTest;
+
+public class EndPoints extends BaseTest {
     public static final String Register = "auth/register";
     public static final String Login = "auth/login";
     public static final String Forgot_Password = "auth/forgot-password";
@@ -11,4 +13,5 @@ public class EndPoints {
     public static final String Products = "products";
     public static final String  Cart = "cart";
     public static final String AddToCart = Cart + "/items";
+    public static  final String UpdateCart = Cart + "/items/" + properties.getProperty("productId");
 }

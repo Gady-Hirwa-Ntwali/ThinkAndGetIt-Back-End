@@ -60,13 +60,11 @@ public class GetProducts extends BaseTest {
 
         Response response = Methods.GetFilteredProduct(invalidParams, EndPoints.Products);
 
-        // Depending on your backend design, this should either fail (400)
-        // OR fallback gracefully to default pagination (e.g., page 1, limit 10/20)
+
         if (response.statusCode() == 400) {
             assertThat(response.path("success"), equalTo(false));
             assertThat(response.path("message"), containsString("invalid"));
         } else {
-            // Fallback assertion check
             assertThat(response.statusCode(), equalTo(200));
             assertThat(response.path("pagination.page"), lessThan(1));
             assertThat(response.path("pagination.limit"), greaterThan(0));
@@ -75,7 +73,6 @@ public class GetProducts extends BaseTest {
 
     @Test
     public void getProductsWithNonExistentCategoryTest() {
-        // Scenario: Passing a category slug that does not exist in the database
         Map<String, Object> queryParams = Map.of(
                 "page", 1,
                 "limit", 5,
@@ -85,7 +82,6 @@ public class GetProducts extends BaseTest {
         Response response = Methods.GetFilteredProduct(queryParams, EndPoints.Products);
         assertThat(response.statusCode(), equalTo(200));
 
-        // The API shouldn't crash; it should return a successful wrapper but an empty data array
         assertThat(response.path("success"), equalTo(false));
         List<Object> dataList = response.path("data");
         assertThat(dataList, hasSize(0));
@@ -93,7 +89,6 @@ public class GetProducts extends BaseTest {
 
     @Test
     public void getProductsWithInvalidSortOptionTest() {
-        // Scenario: Passing a sorting rule that the system doesn't support
         Map<String, Object> queryParams = Map.of(
                 "page", 1,
                 "limit", 5,

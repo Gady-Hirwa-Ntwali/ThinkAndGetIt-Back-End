@@ -16,7 +16,7 @@ import static org.testng.Assert.assertFalse;
 
 public class AddToCart extends BaseTest {
     @Test
-    public void addToCartSuccessfully() {
+    public static void addToCartSuccessfully() {
         CreateProduct.createProductSuccessfully();
         Response response = Methods.postMethod(EndPoints.AddToCart, TestData.addToCartPayload(productId, variantId, 1), token);
         String message = response.path("message");
@@ -60,7 +60,7 @@ public class AddToCart extends BaseTest {
     }
 
     @Test
-    public void addToCartWithoutToken() {
+    public static void addToCartWithoutToken() {
         CreateProduct.createProductSuccessfully();
         Map<String, Object> validPayload = TestData.addToCartPayload(productId, variantId, 1);
 
