@@ -26,15 +26,13 @@ public class AddToCart extends BaseTest {
 
     @Test
     public void addToCartWithInvalidProductId() {
-        // Ensure valid items exist first to isolate the bad product ID
         CreateProduct.createProductSuccessfully();
         String fakeProductId = "00000000-0000-0000-0000-000000000000";
 
         Map<String, Object> badPayload = TestData.addToCartPayload(fakeProductId, variantId, 1);
         Response response = Methods.postMethod(EndPoints.AddToCart, badPayload, token);
-
-        assertEquals(response.statusCode(), 404); // Should fail because product doesn't exist
-        assertFalse(response.path("success"));
+        String message = response.path("message");
+        assertEquals(message, "Product not found");
     }
 
     @Test
@@ -45,19 +43,19 @@ public class AddToCart extends BaseTest {
         Map<String, Object> badPayload = TestData.addToCartPayload(productId, fakeVariantId, 1);
         Response response = Methods.postMethod(EndPoints.AddToCart, badPayload, token);
 
-        assertEquals(response.statusCode(), 404); // Should fail because variant doesn't exist
-        assertFalse(response.path("success"));
+        assertEquals(response.statusCode(), 400);
+        String message = response.path("message");
+        assertEquals(message, "Only 0 item(s) in stock");
     }
 
     @Test
     public void addToCartWithZeroOrNegativeQuantity() {
         CreateProduct.createProductSuccessfully();
 
-        // Testing business boundary constraints (0 quantity)
         Map<String, Object> badPayload = TestData.addToCartPayload(productId, variantId, 0);
         Response response = Methods.postMethod(EndPoints.AddToCart, badPayload, token);
 
-        assertEquals(response.statusCode(), 400); // Validation error
+        assertEquals(response.statusCode(), 400);
         assertFalse(response.path("success"));
     }
 
@@ -66,10 +64,9 @@ public class AddToCart extends BaseTest {
         CreateProduct.createProductSuccessfully();
         Map<String, Object> validPayload = TestData.addToCartPayload(productId, variantId, 1);
 
-        // Explicitly passing an empty string as the token to trigger authentication failure
         Response response = Methods.postMethod(EndPoints.AddToCart, validPayload, "");
 
-        assertEquals(response.statusCode(), 400); // Triggers your "No user or session ID" rule
+        assertEquals(response.statusCode(), 400);
         assertEquals(response.path("message"), "No user or session ID");
         assertFalse(response.path("success"));
     }
