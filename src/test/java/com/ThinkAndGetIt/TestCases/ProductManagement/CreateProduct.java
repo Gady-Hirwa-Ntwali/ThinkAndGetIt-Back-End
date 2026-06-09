@@ -1,11 +1,8 @@
 package com.ThinkAndGetIt.TestCases.ProductManagement;
 
 import com.ThinkAndGetIt.Base.BaseTest;
-import com.ThinkAndGetIt.ReusableMethods.Methods;
 import com.ThinkAndGetIt.ReusableMethods.TestData;
 import com.ThinkAndGetIt.Routes.EndPoints;
-import com.ThinkAndGetIt.TestCases.Authorization.LoginTests;
-import com.ThinkAndGetIt.TestCases.Authorization.RegisterCustomer;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -21,7 +18,6 @@ public class CreateProduct extends BaseTest {
 
     @BeforeClass
     public void loginAsAdmin() {
-        // Log in once before executing tests to keep things DRY and efficient
         Map<String, String> credentials = new HashMap<>();
         credentials.put("email", properties.getProperty("email"));
         credentials.put("password", properties.getProperty("password"));
