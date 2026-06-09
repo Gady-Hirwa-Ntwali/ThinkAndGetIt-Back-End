@@ -2,6 +2,7 @@ package com.ThinkAndGetIt.TestCases.ProductManagement;
 
 import com.ThinkAndGetIt.Base.BaseTest;
 import com.ThinkAndGetIt.ReusableMethods.TestData;
+import com.ThinkAndGetIt.ReusableMethods.UpdateProperties;
 import com.ThinkAndGetIt.Routes.EndPoints;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
@@ -10,42 +11,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.ThinkAndGetIt.ReusableMethods.Methods.postMethod;
+import static com.ThinkAndGetIt.ReusableMethods.TestData.ValidCategoryId;
+import static com.ThinkAndGetIt.ReusableMethods.TestData.token;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateProduct extends BaseTest {
-    private String adminToken;
-    private final String validCategoryId = "24517e2b-3a02-4bfa-aca1-6a9198dc8c70";
 
-    @BeforeClass
-    public void loginAsAdmin() {
-        Map<String, String> credentials = new HashMap<>();
-        credentials.put("email", properties.getProperty("email"));
-        credentials.put("password", properties.getProperty("password"));
 
-        Response loginResponse = postMethod(EndPoints.Login, credentials);
-        adminToken = loginResponse.path("data.token");
-    }
     @Test
-    public void testCreateNewProduct() {
-        Map<String, String> credentials = new HashMap<>();
-        credentials.put("email", properties.getProperty("email"));
-        credentials.put("password", properties.getProperty("password"));
-
-        Response loginResponse = postMethod(EndPoints.Login, credentials);
-        String adminToken = loginResponse.path("data.token");
-
+    public static void createProductSuccessfully() {
         Map<String, Object> productPayload = TestData.createProductPayload(
-                "24517e2b-3a02-4bfa-aca1-6a9198dc8c70",
+                ValidCategoryId,
                 "XL",
                 "Matte Black",
                 "SKU-BAG-XL"
         );
 
-        Response response = postMethod(EndPoints.Products, productPayload, adminToken);
-
-        response.then()
-                .statusCode(201)
-                .body("success", equalTo(true));
+        Response response = postMethod(EndPoints.Products, productPayload, token);
+        String message = response.path("message");
+        String productId = response.path("data.id");
+        String variantId = response.path("data.variants[0].id");
+        UpdateProperties.updatevariantId(variantId, productId);
+        assertThat(response.statusCode(), equalTo(201));
+        assertThat(message, equalTo("Product created"));
     }
     @Test
     public void testCreateProductWithInvalidCategoryId() {
@@ -56,7 +45,7 @@ public class CreateProduct extends BaseTest {
                 "SKU-INVALID-CAT"
         );
 
-        Response response = postMethod(EndPoints.Products, productPayload, adminToken);
+        Response response = postMethod(EndPoints.Products, productPayload, token);
         response.then()
                 .statusCode(400)
                 .body("success", equalTo(false));
@@ -65,12 +54,12 @@ public class CreateProduct extends BaseTest {
     @Test
     public void testCreateProductWithMissingRequiredFields() {
         Map<String, Object> productPayload = TestData.createProductPayload(
-                validCategoryId, "L", "Red", "SKU-MISSING-NAME"
+                ValidCategoryId, "L", "Red", "SKU-MISSING-NAME"
         );
 
         productPayload.remove("name");
 
-        Response response = postMethod(EndPoints.Products, productPayload, adminToken);
+        Response response = postMethod(EndPoints.Products, productPayload, token);
         response.then()
                 .statusCode(500)
                 .body("success", equalTo(false));
@@ -79,12 +68,12 @@ public class CreateProduct extends BaseTest {
     @Test
     public void testCreateProductWithNegativePrice() {
         Map<String, Object> productPayload = TestData.createProductPayload(
-                validCategoryId, "M", "Blue", "SKU-NEG-PRICE"
+                ValidCategoryId, "M", "Blue", "SKU-NEG-PRICE"
         );
 
         productPayload.put("price", -50);
 
-        Response response = postMethod(EndPoints.Products, productPayload, adminToken);
+        Response response = postMethod(EndPoints.Products, productPayload, token);
 
         response.then()
                 .statusCode(400)

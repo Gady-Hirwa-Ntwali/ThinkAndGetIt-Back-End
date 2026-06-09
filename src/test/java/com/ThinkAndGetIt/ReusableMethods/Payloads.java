@@ -2,7 +2,7 @@ package com.ThinkAndGetIt.ReusableMethods;
 
 import java.util.HashMap;
 
-public class Payload {
+public class Payloads {
 
     public static HashMap payload(String email, String password, String fName, String lName, String phone){
         HashMap<String, Object> payload = new HashMap<>();
@@ -13,4 +13,5 @@ public class Payload {
         payload.put("phone", phone);
         return payload;
     }
+
 }

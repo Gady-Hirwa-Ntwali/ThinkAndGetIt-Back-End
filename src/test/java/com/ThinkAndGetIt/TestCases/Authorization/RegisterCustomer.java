@@ -3,10 +3,9 @@ package com.ThinkAndGetIt.TestCases.Authorization;
 import com.ThinkAndGetIt.Base.BaseTest;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import static com.ThinkAndGetIt.ReusableMethods.Payload.payload;
+import static com.ThinkAndGetIt.ReusableMethods.Payloads.payload;
 import static com.ThinkAndGetIt.ReusableMethods.LoginAndRegisterMethods.createAccountMethod;
 import static com.ThinkAndGetIt.ReusableMethods.TestData.*;
-import static com.ThinkAndGetIt.ReusableMethods.UpdateProperties.updatePropertiesFile;
 import static org.testng.Assert.*;
 
 public class RegisterCustomer extends BaseTest {

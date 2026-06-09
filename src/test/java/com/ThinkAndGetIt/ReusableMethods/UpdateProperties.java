@@ -26,4 +26,25 @@ public class UpdateProperties {
             e.printStackTrace();
         }
     }
+
+    public static void updatevariantId(String variantId, String productId){
+        String filePath = "src/test/resources/Config.Properties";
+        Properties props = new Properties();
+
+        try (FileInputStream in = new FileInputStream(filePath)) {
+            props.load(in);
+        } catch (IOException e) {
+            System.err.println("Could not load properties file.");
+        }
+
+        props.setProperty("variantId", variantId);
+        props.setProperty("productId", productId);
+
+        try (FileOutputStream out = new FileOutputStream(filePath)) {
+            props.store(out, "Updated via Automation Login Test Execution");
+            System.out.println("variantId successfully updated in Config.Properties!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

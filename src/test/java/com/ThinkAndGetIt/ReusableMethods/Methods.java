@@ -88,6 +88,10 @@ public class Methods extends BaseTest {
                 .extract().response();
     }
 
+    public static Response DeleteMethod(String targetEndpoint) {
+        return DeleteMethod(targetEndpoint, "");
+    }
+
     public static Response DeleteMethod(String targetEndpoint, String token){
         return given()
                 .spec(requestSpec)

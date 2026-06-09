@@ -1,17 +1,24 @@
 package com.ThinkAndGetIt.ReusableMethods;
 
+import com.ThinkAndGetIt.Base.BaseTest;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestData {
+public class TestData extends BaseTest {
 
+    public static String token = properties.getProperty("token");
+    public static String productId = properties.getProperty("productId");
+    public static String variantId = properties.getProperty("variantId");
     public static String DynamicEmail = "gady_" + System.currentTimeMillis() + "@gmail.com";
     public static String Password = "dlksjflkdj@T2y";
     public static String FName = "Am not";
     public static String LName = "A Human";
     public static String Phone = "0782738589435";
+    public static final String ValidCategoryId = "24517e2b-3a02-4bfa-aca1-6a9198dc8c70";
+
 
     public static Map<String, Object> createProductPayload(String categoryId, String size, String color, String sku) {
         Map<String, Object> productBody = new HashMap<>();
@@ -61,5 +68,23 @@ public class TestData {
         updateBody.put("name", name);
         updateBody.put("price", price);
         return updateBody;
+    }
+//
+//    public static Map<String, Object> addToCartPayload(int quantity){
+//        Map<String, String> payload = new HashMap<>();
+//        payload.put("productId", productId);
+//        payload.put("variantId", variantId);
+//        payload.put(("quantity", quantity);
+//        return payload;
+//    }
+
+    public static Map<String, Object> addToCartPayload(String productId, String variantId, int quantity) {
+        Map<String, Object> payload = new HashMap<>();
+
+        payload.put("productId", productId);
+        payload.put("variantId", variantId);
+        payload.put("quantity", quantity); // Works perfectly now because the map values are 'Object'
+
+        return payload;
     }
 }

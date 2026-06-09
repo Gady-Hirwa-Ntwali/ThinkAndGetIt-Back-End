@@ -9,4 +9,6 @@ public class EndPoints {
     public static final String TokenRefresh = "/auth/refresh";
     public static final String VerifyEmail = "auth/verify-email";
     public static final String Products = "products";
+    public static final String  Cart = "cart";
+    public static final String AddToCart = Cart + "/items";
 }
