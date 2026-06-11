@@ -7,6 +7,7 @@ import com.ThinkAndGetIt.TestCases.CartManagement.AddToCart;
 import com.ThinkAndGetIt.TestCases.CartManagement.GetCurrentCart;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.ThinkAndGetIt.ReusableMethods.TestData.token;

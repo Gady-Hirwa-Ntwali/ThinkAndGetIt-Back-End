@@ -119,4 +119,10 @@ public class TestData extends BaseTest {
         return cartResponse.path("data.items[0].id");
     }
 
+    public static Map<String, Object> applyCouponPayload(String couponCode) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("code", couponCode);
+        return payload;
+    }
+
 }
