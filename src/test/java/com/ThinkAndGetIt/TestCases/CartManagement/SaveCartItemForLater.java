@@ -8,16 +8,14 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static com.ThinkAndGetIt.ReusableMethods.TestData.token;
+import static com.ThinkAndGetIt.Routes.EndPoints.SaveForLater;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class SaveCartItemForLater extends BaseTest {
     @Test
     public void testSaveCartItemForLaterSuccessfully() {
-        TestData testData = new TestData();
-        String patchPath = "/cart/items/" + testData.activeItemId + "/save-for-later";
-
-        Response response = Methods.patchMethod(patchPath, token);
+        Response response = Methods.patchMethod(SaveForLater, token);
 
         assertThat(response.statusCode(), equalTo(200));
         assertThat(response.path("success"), equalTo(true));

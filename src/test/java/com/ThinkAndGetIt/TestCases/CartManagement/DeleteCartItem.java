@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static com.ThinkAndGetIt.ReusableMethods.TestData.*;
+import static com.ThinkAndGetIt.Routes.EndPoints.DeleteItemInCart;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -17,7 +18,7 @@ public class DeleteCartItem extends BaseTest {
     public void testDeleteCartItemSuccessfully() {
         TestData testData = new TestData();
         String deletePath = "/cart/items/" + testData.activeItemId;
-        Response response = Methods.DeleteMethod(deletePath, token);
+        Response response = Methods.DeleteMethod(DeleteItemInCart, token);
 
         assertThat(response.statusCode(), equalTo(200));
         assertThat(response.path("success"), equalTo(true));

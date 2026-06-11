@@ -1,8 +1,10 @@
 package com.ThinkAndGetIt.Routes;
 
 import com.ThinkAndGetIt.Base.BaseTest;
+import com.ThinkAndGetIt.ReusableMethods.TestData;
 
 public class EndPoints extends BaseTest {
+    public static TestData testData = new TestData();
     public static final String Register = "auth/register";
     public static final String Login = "auth/login";
     public static final String Forgot_Password = "auth/forgot-password";
@@ -12,6 +14,7 @@ public class EndPoints extends BaseTest {
     public static final String VerifyEmail = "auth/verify-email";
     public static final String Products = "products";
     public static final String  Cart = "cart";
-    public static final String AddToCart = Cart + "/items";
-    public static final String UpdateCart = AddToCart + "";
+    public static final String AddToCart = Cart + "/items/";
+    public static final String SaveForLater = AddToCart +testData.activeItemId + "/save-for-later/";
+    public static final String DeleteItemInCart = AddToCart + testData.activeItemId;
 }
