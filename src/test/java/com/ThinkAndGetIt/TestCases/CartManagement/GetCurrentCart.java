@@ -12,10 +12,11 @@ import static org.testng.Assert.assertEquals;
 
 public class GetCurrentCart extends BaseTest {
     @Test
-    void testGetCartSuccessfullyAsLoggedInUser() {
+    public static Response testGetCartSuccessfullyAsLoggedInUser() {
         successfulLogin();
         Response response = Methods.GetMethod(Cart, token);
         assertEquals(response.statusCode(), 200);
+        return response;
     }
 
     @Test
@@ -23,4 +24,5 @@ public class GetCurrentCart extends BaseTest {
         Response response = Methods.GetMethod(Cart, token);
         assertEquals(response.statusCode(), 200);
     }
+
 }

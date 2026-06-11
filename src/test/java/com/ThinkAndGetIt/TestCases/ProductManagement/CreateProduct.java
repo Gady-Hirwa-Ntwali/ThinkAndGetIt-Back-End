@@ -5,9 +5,7 @@ import com.ThinkAndGetIt.ReusableMethods.TestData;
 import com.ThinkAndGetIt.ReusableMethods.UpdateProperties;
 import com.ThinkAndGetIt.Routes.EndPoints;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.ThinkAndGetIt.ReusableMethods.Methods.postMethod;
@@ -17,8 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateProduct extends BaseTest {
-
-
     @Test
     public static void createProductSuccessfully() {
         Map<String, Object> productPayload = TestData.createProductPayload(

@@ -13,5 +13,5 @@ public class EndPoints extends BaseTest {
     public static final String Products = "products";
     public static final String  Cart = "cart";
     public static final String AddToCart = Cart + "/items";
-    public static  final String UpdateCart = Cart + "/items/" + properties.getProperty("productId");
+    public static final String UpdateCart = AddToCart + "";
 }

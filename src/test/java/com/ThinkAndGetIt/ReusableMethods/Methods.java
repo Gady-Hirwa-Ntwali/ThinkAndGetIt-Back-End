@@ -2,10 +2,15 @@ package com.ThinkAndGetIt.ReusableMethods;
 
 import com.ThinkAndGetIt.Base.BaseTest;
 import com.ThinkAndGetIt.Routes.EndPoints;
+import com.ThinkAndGetIt.TestCases.Authorization.LoginTests;
+import com.ThinkAndGetIt.TestCases.CartManagement.AddToCart;
+import com.ThinkAndGetIt.TestCases.CartManagement.GetCurrentCart;
 import io.restassured.response.Response;
 
 import java.util.Map;
 
+import static com.ThinkAndGetIt.ReusableMethods.TestData.token;
+import static com.ThinkAndGetIt.ReusableMethods.TestData.updateCartItem;
 import static io.restassured.RestAssured.given;
 
 public class Methods extends BaseTest {
@@ -98,5 +103,15 @@ public class Methods extends BaseTest {
                 .header("Authorization", "Bearer " + token)
                 .when()
                 .delete(targetEndpoint);
+    }
+
+    public static Response updateCartItemQuantity(int quantity){
+        LoginTests.successfulLogin();
+        AddToCart.addToCartSuccessfully();
+        TestData.renewProductVariables();
+        Response cartResponse = GetCurrentCart.testGetCartSuccessfullyAsLoggedInUser();
+        String actualCartItemId = cartResponse.path("data.items.find { it.variantId == '" + TestData.variantId + "' }.id");
+
+        return Methods.putMethod(EndPoints.AddToCart + "/" + actualCartItemId, updateCartItem(quantity), token);
     }
 }

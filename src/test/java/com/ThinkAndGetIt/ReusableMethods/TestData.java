@@ -1,6 +1,11 @@
 package com.ThinkAndGetIt.ReusableMethods;
 
 import com.ThinkAndGetIt.Base.BaseTest;
+import com.ThinkAndGetIt.TestCases.Authorization.LoginTests;
+import com.ThinkAndGetIt.TestCases.CartManagement.AddToCart;
+import com.ThinkAndGetIt.TestCases.CartManagement.GetCurrentCart;
+import com.ThinkAndGetIt.TestCases.ProductManagement.CreateProduct;
+import io.restassured.response.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,21 +14,22 @@ import java.util.Map;
 
 public class TestData extends BaseTest {
 
-    public static String token = properties.getProperty("token");
-    public static String productId = properties.getProperty("productId");
-    public static String variantId = properties.getProperty("variantId");
+    public static String token;
+    public static String productId;
+    public static String variantId;
     public static String DynamicEmail = "gady_" + System.currentTimeMillis() + "@gmail.com";
     public static String Password = "dlksjflkdj@T2y";
     public static String FName = "Am not";
     public static String LName = "A Human";
     public static String Phone = "0782738589435";
     public static final String ValidCategoryId = "24517e2b-3a02-4bfa-aca1-6a9198dc8c70";
+    public static String activeItemId = getFreshCartItemId();
 
 
     public static Map<String, Object> createProductPayload(String categoryId, String size, String color, String sku) {
         Map<String, Object> productBody = new HashMap<>();
 
-        productBody.put("name", "sneakers " + System.currentTimeMillis());
+        productBody.put("name", "sneakrella " + System.currentTimeMillis());
         productBody.put("description", " sport shoes");
         productBody.put("price", 150);
         productBody.put("comparePrice", 200);
@@ -83,16 +89,36 @@ public class TestData extends BaseTest {
 
         payload.put("productId", productId);
         payload.put("variantId", variantId);
-        payload.put("quantity", quantity); // Works perfectly now because the map values are 'Object'
+        payload.put("quantity", quantity);
 
         return payload;
     }
 
     public static Map<String, Object> updateCartItem(int quantity) {
         Map<String, Object> payload = new HashMap<>();
-        payload.put("quantity", quantity); // Works perfectly now because the map values are 'Object'
+        payload.put("quantity", quantity);
 
         return payload;
+    }
+
+    static {
+        renewProductVariables();
+    }
+    public static void renewProductVariables() {
+        token = properties.getProperty("token");
+        productId = properties.getProperty("productId");
+        variantId = properties.getProperty("variantId");
+        System.out.println("TestData Variables Renewed! Product ID: " + productId);
+    }
+
+    public static String getFreshCartItemId() {
+        LoginTests.successfulLogin();
+        CreateProduct.createProductSuccessfully();
+        TestData.renewProductVariables();
+        AddToCart.addToCartSuccessfully();
+
+        Response cartResponse = GetCurrentCart.testGetCartSuccessfullyAsLoggedInUser();
+        return cartResponse.path("data.items.find { it.variantId == '" + TestData.variantId + "' }.id");
     }
 
 }
