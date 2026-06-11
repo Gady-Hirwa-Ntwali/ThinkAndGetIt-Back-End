@@ -18,9 +18,14 @@ public class BaseTest {
     public static Properties properties = Utils.loadProperties("src/test/resources/config.properties");
     public static String email = properties.getProperty("email");
 
+    public static void reloadProperties() {
+        properties = Utils.loadProperties("src/test/resources/config.properties");
+        email = properties.getProperty("email");
+        System.out.println("Config.properties reloaded into Java memory!");
+    }
+
     @BeforeClass
     public void setup() throws IOException {
-
         requestSpec = new RequestSpecBuilder()
                 .setBaseUri(properties.getProperty("base.url"))
                 .setContentType(ContentType.JSON)

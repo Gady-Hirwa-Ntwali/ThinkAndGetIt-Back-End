@@ -4,40 +4,42 @@ import com.ThinkAndGetIt.Base.BaseTest;
 import com.ThinkAndGetIt.ReusableMethods.Methods;
 import com.ThinkAndGetIt.ReusableMethods.TestData;
 import com.ThinkAndGetIt.TestCases.Authorization.LoginTests;
-import com.ThinkAndGetIt.TestCases.ProductManagement.CreateProduct;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-import static com.ThinkAndGetIt.ReusableMethods.TestData.*;
+import static com.ThinkAndGetIt.ReusableMethods.TestData.token;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class DeleteCartItem extends BaseTest {
+public class SaveCartItemForLater extends BaseTest {
     @Test
-    public void testDeleteCartItemSuccessfully() {
+    public void testSaveCartItemForLaterSuccessfully() {
         TestData testData = new TestData();
-        String deletePath = "/cart/items/" + testData.activeItemId;
-        Response response = Methods.DeleteMethod(deletePath, token);
+        String patchPath = "/cart/items/" + testData.activeItemId + "/save-for-later";
+
+        Response response = Methods.patchMethod(patchPath, token);
 
         assertThat(response.statusCode(), equalTo(200));
         assertThat(response.path("success"), equalTo(true));
-        assertThat(response.path("message"), equalTo("Item removed"));
+        assertThat(response.path("message"), equalTo("Saved for later"));
     }
 
     @Test
-    public void testDeleteNonExistentCartItem() {
+    public void testSaveForLaterNonExistentItem() {
         LoginTests.successfulLogin();
         String fakeItemId = "00000000-0000-0000-0000-000000000000";
 
-        Response response = Methods.DeleteMethod("/cart/items/" + fakeItemId, token);
+        String patchPath = "/cart/items/" + fakeItemId + "/save-for-later";
+        Response response = Methods.patchMethod(patchPath, token);
+
         assertThat(response.statusCode(), equalTo(404));
         assertThat(response.path("success"), equalTo(false));
     }
 
     @Test
-    public void testDeleteCartItemWithoutAuthentication() {
-        Response response = Methods.DeleteMethod("/cart/items/some-random-id", "");
-
+    public void testSaveForLaterWithoutAuthentication() {
+        String patchPath = "/cart/items/any-random-id-string/save-for-later";
+        Response response = Methods.patchMethod(patchPath, "");
         assertThat(response.statusCode(), equalTo(404));
     }
 }

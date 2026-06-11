@@ -102,7 +102,11 @@ public class Methods extends BaseTest {
                 .spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete(targetEndpoint);
+                .delete(targetEndpoint)
+                .then()
+                .spec(responseSpec)
+                .log().all()
+                .extract().response();
     }
 
     public static Response updateCartItemQuantity(int quantity){
@@ -113,5 +117,30 @@ public class Methods extends BaseTest {
         String actualCartItemId = cartResponse.path("data.items.find { it.variantId == '" + TestData.variantId + "' }.id");
 
         return Methods.putMethod(EndPoints.AddToCart + "/" + actualCartItemId, updateCartItem(quantity), token);
+    }
+
+    public static Response patchMethod(String endpoint, String token) {
+        return given()
+                .spec(requestSpec)
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .patch(endpoint)
+                .then()
+                .spec(responseSpec)
+                .log().all()
+                .extract().response();
+    }
+
+    public static Response patchMethod(String endpoint, Object body, String token) {
+        return given()
+                .spec(requestSpec)
+                .header("Authorization", "Bearer " + token)
+                .body(body)
+                .when()
+                .patch(endpoint)
+                .then()
+                .spec(responseSpec)
+                .log().all()
+                .extract().response();
     }
 }

@@ -4,7 +4,6 @@ import com.ThinkAndGetIt.Base.BaseTest;
 import com.ThinkAndGetIt.TestCases.Authorization.LoginTests;
 import com.ThinkAndGetIt.TestCases.CartManagement.AddToCart;
 import com.ThinkAndGetIt.TestCases.CartManagement.GetCurrentCart;
-import com.ThinkAndGetIt.TestCases.ProductManagement.CreateProduct;
 import io.restassured.response.Response;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class TestData extends BaseTest {
     public static String LName = "A Human";
     public static String Phone = "0782738589435";
     public static final String ValidCategoryId = "24517e2b-3a02-4bfa-aca1-6a9198dc8c70";
-    public static String activeItemId = getFreshCartItemId();
+    public String activeItemId = getFreshCartItemId();
 
 
     public static Map<String, Object> createProductPayload(String categoryId, String size, String color, String sku) {
@@ -111,14 +110,13 @@ public class TestData extends BaseTest {
         System.out.println("TestData Variables Renewed! Product ID: " + productId);
     }
 
-    public static String getFreshCartItemId() {
+    public String getFreshCartItemId() {
         LoginTests.successfulLogin();
-        CreateProduct.createProductSuccessfully();
         TestData.renewProductVariables();
         AddToCart.addToCartSuccessfully();
 
         Response cartResponse = GetCurrentCart.testGetCartSuccessfullyAsLoggedInUser();
-        return cartResponse.path("data.items.find { it.variantId == '" + TestData.variantId + "' }.id");
+        return cartResponse.path("data.items[0].id");
     }
 
 }

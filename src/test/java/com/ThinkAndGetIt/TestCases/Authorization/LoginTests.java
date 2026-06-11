@@ -1,6 +1,7 @@
 package com.ThinkAndGetIt.TestCases.Authorization;
 
 import com.ThinkAndGetIt.Base.BaseTest;
+import com.ThinkAndGetIt.ReusableMethods.TestData;
 import com.ThinkAndGetIt.ReusableMethods.UpdateProperties;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -24,6 +25,8 @@ public class LoginTests extends BaseTest {
         String token = response.path("data.token");
         String refreshToken = response.path("data.refreshToken");
         UpdateProperties.updatePropertiesFile(token, refreshToken);
+        BaseTest.reloadProperties();
+        TestData.renewProductVariables();
         String actualFirstName = response.path("data.user.firstName");
         assertEquals(actualFirstName, "Alice");
     }
