@@ -19,12 +19,12 @@ public class ApplyCoupon extends BaseTest {
         TestData testData = new TestData();
         testData.getFreshCartItemId();
 
-        Map<String, Object> payload = TestData.applyCouponPayload("SAVE10");
+        Map<String, Object> payload = TestData.applyCouponPayload("SAVE15NOW");
 
         Response response = Methods.postMethod("/cart/coupon", payload, TestData.token);
         assertThat(response.statusCode(), equalTo(200));
         assertThat(response.path("success"), equalTo(true));
-        assertThat(response.path("message"), equalTo("Coupon applied"));
+        assertThat(response.path("message"), equalTo("Coupon applied! You save 15%"));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ApplyCoupon extends BaseTest {
 
         assertThat(response.statusCode(), equalTo(400));
         assertThat(response.path("success"), equalTo(false));
-        assertThat(response.path("message"), equalTo("Invalid coupon"));
+        assertThat(response.path("message"), equalTo("Invalid or expired coupon code"));
     }
 
     @Test
