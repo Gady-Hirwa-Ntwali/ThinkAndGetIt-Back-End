@@ -17,4 +17,5 @@ public class EndPoints extends BaseTest {
     public static final String AddToCart = Cart + "/items/";
     public static final String SaveForLater = AddToCart +testData.activeItemId + "/save-for-later/";
     public static final String DeleteItemInCart = AddToCart + testData.activeItemId;
+    public static final String Coupon = "/cart/coupon";
 }

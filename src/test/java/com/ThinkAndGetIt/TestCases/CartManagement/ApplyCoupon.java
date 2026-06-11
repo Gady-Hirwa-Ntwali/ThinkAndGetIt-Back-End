@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
+import static com.ThinkAndGetIt.Routes.EndPoints.Coupon;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -21,7 +22,7 @@ public class ApplyCoupon extends BaseTest {
 
         Map<String, Object> payload = TestData.applyCouponPayload("SAVE15NOW");
 
-        Response response = Methods.postMethod("/cart/coupon", payload, TestData.token);
+        Response response = Methods.postMethod(Coupon, payload, TestData.token);
         assertThat(response.statusCode(), equalTo(200));
         assertThat(response.path("success"), equalTo(true));
         assertThat(response.path("message"), equalTo("Coupon applied! You save 15%"));
@@ -34,7 +35,7 @@ public class ApplyCoupon extends BaseTest {
 
         Map<String, Object> payload = TestData.applyCouponPayload("FAKE_COUPON_CODE_999");
 
-        Response response = Methods.postMethod("/cart/coupon", payload, TestData.token);
+        Response response = Methods.postMethod(Coupon, payload, TestData.token);
 
         assertThat(response.statusCode(), equalTo(400));
         assertThat(response.path("success"), equalTo(false));
@@ -45,7 +46,7 @@ public class ApplyCoupon extends BaseTest {
     public void testApplyCouponWithoutAuthentication() {
         Map<String, Object> payload = TestData.applyCouponPayload("SAVE10");
 
-        Response response = Methods.postMethod("/cart/coupon", payload, "");
+        Response response = Methods.postMethod(Coupon, payload, "");
 
         assertThat(response.statusCode(), equalTo(401));
     }
