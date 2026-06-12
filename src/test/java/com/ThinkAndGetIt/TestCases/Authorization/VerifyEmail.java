@@ -6,10 +6,8 @@ import com.ThinkAndGetIt.Routes.EndPoints;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
-
-import static com.ThinkAndGetIt.Routes.EndPoints.PasswordReset;
 import static com.ThinkAndGetIt.TestCases.Authorization.RegisterCustomer.successfulRegister;
-import static io.restassured.RestAssured.given;
+
 
 public class VerifyEmail extends BaseTest {
     @Test
