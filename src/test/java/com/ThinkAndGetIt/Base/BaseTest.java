@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class BaseTest {
-    protected static RequestSpecification requestSpec;
-    protected static ResponseSpecification responseSpec;
+    public static RequestSpecification requestSpec;
+    public static ResponseSpecification responseSpec;
     public static Properties properties = Utils.loadProperties("src/test/resources/config.properties");
     public static String email = properties.getProperty("email");
 

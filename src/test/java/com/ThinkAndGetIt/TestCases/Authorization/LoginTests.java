@@ -1,6 +1,7 @@
 package com.ThinkAndGetIt.TestCases.Authorization;
 
 import com.ThinkAndGetIt.Base.BaseTest;
+import com.ThinkAndGetIt.ReusableMethods.UpdateProperties;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -20,8 +21,11 @@ public class LoginTests extends BaseTest {
     public static void successfulLogin() {
         Response response = loginTest(properties.getProperty("email"), properties.getProperty("password"));
         assertEquals(response.statusCode(), 200);
+        String token = response.path("data.token");
+        String refreshToken = response.path("data.refreshToken");
+        UpdateProperties.updatePropertiesFile(token, refreshToken);
         String actualFirstName = response.path("data.user.firstName");
-        assertEquals(actualFirstName, "darry");
+        assertEquals(actualFirstName, "Alice");
     }
 
     @Test

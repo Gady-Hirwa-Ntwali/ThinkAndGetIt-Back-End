@@ -13,7 +13,7 @@ public class UpdateProperties {
         try (FileInputStream in = new FileInputStream(filePath)) {
             props.load(in);
         } catch (IOException e) {
-            System.err.println("Could not load properties file. Creating a new one.");
+            System.err.println("Could not load properties file.");
         }
 
         props.setProperty("token", token);
@@ -24,7 +24,6 @@ public class UpdateProperties {
             System.out.println("Tokens successfully updated in Config.Properties!");
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to write tokens back to properties file.");
         }
     }
 }
