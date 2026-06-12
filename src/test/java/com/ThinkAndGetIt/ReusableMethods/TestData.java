@@ -125,4 +125,16 @@ public class TestData extends BaseTest {
         return payload;
     }
 
+    public static Map<String, Object> createCategoryPayload(String name, String description, String parentId) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("name", name);
+        payload.put("description", description);
+
+        if (parentId != null) {
+            payload.put("parentId", parentId);
+        }
+
+        return payload;
+    }
+
 }

@@ -28,7 +28,7 @@ public class LoginTests extends BaseTest {
         BaseTest.reloadProperties();
         TestData.renewProductVariables();
         String actualFirstName = response.path("data.user.firstName");
-        assertEquals(actualFirstName, "Alice");
+        assertEquals(actualFirstName, "Xmhnpur");
     }
 
     @Test

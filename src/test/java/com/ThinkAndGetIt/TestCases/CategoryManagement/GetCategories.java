@@ -1,4 +1,4 @@
-package com.ThinkAndGetIt.CategoryManagement;
+package com.ThinkAndGetIt.TestCases.CategoryManagement;
 
 import com.ThinkAndGetIt.Base.BaseTest;
 import com.ThinkAndGetIt.ReusableMethods.Methods;
