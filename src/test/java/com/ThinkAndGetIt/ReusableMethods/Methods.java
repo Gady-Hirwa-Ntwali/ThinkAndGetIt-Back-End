@@ -144,4 +144,31 @@ public class Methods extends BaseTest {
                 .log().all()
                 .extract().response();
     }
+
+    public static Response postMultipartMethod(String endpoint, String controlName, java.io.File file, String token) {
+        if (token == null || token.isEmpty()) {
+            return given()
+                    .spec(requestSpec)
+                    .contentType("multipart/form-data") // Force multipart header to overwrite requestSpec JSON content type
+                    .multiPart(controlName, file)
+                    .when()
+                    .post(endpoint)
+                    .then()
+                    .spec(responseSpec)
+                    .log().all()
+                    .extract().response();
+        }
+
+        return given()
+                .spec(requestSpec)
+                .header("Authorization", "Bearer " + token)
+                .contentType("multipart/form-data") // Force multipart header to overwrite requestSpec JSON content type
+                .multiPart(controlName, file)
+                .when()
+                .post(endpoint)
+                .then()
+                .spec(responseSpec)
+                .log().all()
+                .extract().response();
+    }
 }

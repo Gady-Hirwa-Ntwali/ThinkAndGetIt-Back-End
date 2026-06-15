@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class UpdateUserProfile extends BaseTest {
+public class UploadUserProfile extends BaseTest {
 
     private String authToken;
 
