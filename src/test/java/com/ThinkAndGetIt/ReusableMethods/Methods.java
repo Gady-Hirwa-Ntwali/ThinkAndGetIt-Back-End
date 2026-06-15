@@ -149,7 +149,7 @@ public class Methods extends BaseTest {
         if (token == null || token.isEmpty()) {
             return given()
                     .spec(requestSpec)
-                    .contentType("multipart/form-data") // Force multipart header to overwrite requestSpec JSON content type
+                    .contentType("multipart/form-data")
                     .multiPart(controlName, file)
                     .when()
                     .post(endpoint)
@@ -162,7 +162,7 @@ public class Methods extends BaseTest {
         return given()
                 .spec(requestSpec)
                 .header("Authorization", "Bearer " + token)
-                .contentType("multipart/form-data") // Force multipart header to overwrite requestSpec JSON content type
+                .contentType("multipart/form-data")
                 .multiPart(controlName, file)
                 .when()
                 .post(endpoint)

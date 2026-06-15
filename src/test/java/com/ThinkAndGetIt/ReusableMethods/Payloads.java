@@ -14,4 +14,11 @@ public class Payloads {
         return payload;
     }
 
+    public static HashMap<String, Object> changePasswordPayload(String currentPassword, String newPassword) {
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("currentPassword", currentPassword); // Matches "currentPassword" in documentation
+        payload.put("newPassword", newPassword);         // Matches "newPassword" in documentation
+        return payload;
+    }
+
 }
