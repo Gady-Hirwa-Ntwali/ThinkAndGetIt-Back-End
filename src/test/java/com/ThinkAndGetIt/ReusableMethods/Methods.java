@@ -172,5 +172,29 @@ public class Methods extends BaseTest {
                 .extract().response();
     }
 
+    public static Response GetFilteredProduct(Map<String, Object> queryParams, String endPoint, String token) {
+        if (token == null || token.isEmpty()) {
+            return given()
+                    .spec(requestSpec)
+                    .queryParams(queryParams)
+                    .when()
+                    .get(endPoint)
+                    .then()
+                    .spec(responseSpec)
+                    .log().all()
+                    .extract().response();
+        }
+
+        return given()
+                .spec(requestSpec)
+                .header("Authorization", "Bearer " + token)
+                .queryParams(queryParams)
+                .when()
+                .get(endPoint)
+                .then()
+                .spec(responseSpec)
+                .log().all()
+                .extract().response();
+    }
 
 }

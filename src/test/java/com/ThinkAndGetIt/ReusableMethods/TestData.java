@@ -137,4 +137,13 @@ public class TestData extends BaseTest {
         return payload;
     }
 
+    public static Map<String, Object> getOrdersQueryParams(int page, String status) {
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("page", page);
+        if (status != null && !status.isEmpty()) {
+            queryParams.put("status", status);
+        }
+        return queryParams;
+    }
+
 }
