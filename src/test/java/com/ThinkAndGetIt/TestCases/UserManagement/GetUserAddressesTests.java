@@ -3,17 +3,19 @@ package com.ThinkAndGetIt.TestCases.UserManagement;
 import com.ThinkAndGetIt.Base.BaseTest;
 import com.ThinkAndGetIt.ReusableMethods.Methods;
 import com.ThinkAndGetIt.ReusableMethods.TestData;
+import com.ThinkAndGetIt.Routes.EndPoints;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.ThinkAndGetIt.Routes.EndPoints.GET_ADDRESSES_ENDPOINT;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class GetUserAddressesTests extends BaseTest {
 
     private String authToken;
-    private final String GET_ADDRESSES_ENDPOINT = "/users/addresses";
+
 
     @BeforeClass
     public void setUpUserToken() {

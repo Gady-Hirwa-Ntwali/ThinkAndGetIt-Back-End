@@ -8,14 +8,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.io.File;
 
+import static com.ThinkAndGetIt.Routes.EndPoints.AVATAR_ENDPOINT;
+import static com.ThinkAndGetIt.Routes.EndPoints.CONTROL_NAME;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class UploadUserAvatar extends BaseTest {
 
     private String authToken;
-    private final String AVATAR_ENDPOINT = "/users/avatar";
-    private final String CONTROL_NAME = "avatar";
 
     @BeforeClass
     public void setUpUserToken() {
@@ -50,7 +50,7 @@ public class UploadUserAvatar extends BaseTest {
         try {
             invalidFile.getParentFile().mkdirs();
             invalidFile.createNewFile();
-        } catch (Exception e) { /* no-op */ }
+        } catch (Exception e) { }
 
         Response response = Methods.postMultipartMethod(AVATAR_ENDPOINT, CONTROL_NAME, invalidFile, authToken);
 

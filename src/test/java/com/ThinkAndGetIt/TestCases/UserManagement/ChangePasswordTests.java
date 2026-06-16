@@ -9,13 +9,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.HashMap;
 
+import static com.ThinkAndGetIt.Routes.EndPoints.CHANGE_PASSWORD_ENDPOINT;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class ChangePasswordTests extends BaseTest {
 
     private String authToken;
-    private final String CHANGE_PASSWORD_ENDPOINT = "/users/change-password";
 
     @BeforeClass
     public void setUpUserToken() {

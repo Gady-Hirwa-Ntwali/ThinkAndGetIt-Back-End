@@ -18,4 +18,10 @@ public class EndPoints extends BaseTest {
     public static final String SaveForLater = AddToCart +testData.activeItemId + "/save-for-later/";
     public static final String DeleteItemInCart = AddToCart + testData.activeItemId;
     public static final String Coupon = "/cart/coupon";
+    public static final String GET_ADDRESSES_ENDPOINT = "/users/addresses";
+    public static final String CHANGE_PASSWORD_ENDPOINT = "/users/change-password";
+    public static final String AVATAR_ENDPOINT = "/users/avatar";
+    public static final String CONTROL_NAME = "avatar";
+    public static final String Orders = "orders";
+
 }

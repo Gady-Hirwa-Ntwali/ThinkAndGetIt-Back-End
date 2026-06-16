@@ -16,8 +16,33 @@ public class Payloads {
 
     public static HashMap<String, Object> changePasswordPayload(String currentPassword, String newPassword) {
         HashMap<String, Object> payload = new HashMap<>();
-        payload.put("currentPassword", currentPassword); // Matches "currentPassword" in documentation
-        payload.put("newPassword", newPassword);         // Matches "newPassword" in documentation
+        payload.put("currentPassword", currentPassword);
+        payload.put("newPassword", newPassword);
+        return payload;
+    }
+
+
+    public static HashMap<String, Object> addAddressPayload(String label, String firstName, String lastName, String phone, String street, String city, String state, String country, String postalCode, boolean isDefault) {
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("label", label);
+        payload.put("firstName", firstName);
+        payload.put("lastName", lastName);
+        payload.put("phone", phone);
+        payload.put("street", street);
+        payload.put("city", city);
+        payload.put("state", state);
+        payload.put("country", country);
+        payload.put("postalCode", postalCode);
+        payload.put("isDefault", isDefault);
+        return payload;
+    }
+
+    public static HashMap<String, Object> placeOrderPayload(String addressId, String paymentMethod, String notes, int shippingFee) {
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("addressId", addressId);
+        payload.put("paymentMethod", paymentMethod);
+        payload.put("notes", notes);
+        payload.put("shippingFee", shippingFee);
         return payload;
     }
 

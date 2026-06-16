@@ -171,4 +171,6 @@ public class Methods extends BaseTest {
                 .log().all()
                 .extract().response();
     }
+
+
 }
