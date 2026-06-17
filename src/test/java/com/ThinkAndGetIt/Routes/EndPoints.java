@@ -3,6 +3,8 @@ package com.ThinkAndGetIt.Routes;
 import com.ThinkAndGetIt.Base.BaseTest;
 import com.ThinkAndGetIt.ReusableMethods.TestData;
 
+import static com.ThinkAndGetIt.TestCases.OrderPlacement.GetSingleOrder.dynamicOrderId;
+
 public class EndPoints extends BaseTest {
     public static TestData testData = new TestData();
     public static final String Register = "auth/register";
@@ -23,5 +25,15 @@ public class EndPoints extends BaseTest {
     public static final String AVATAR_ENDPOINT = "/users/avatar";
     public static final String CONTROL_NAME = "avatar";
     public static final String Orders = "orders";
+   public static final String SingleOrder = Orders + "/" + dynamicOrderId;
+
+    public static String getCancelOrderEndpoint(String orderId) {
+        return Orders + "/" + orderId + "/cancel";
+    }
+
+    public static String getSingleOrderEndpoint(String orderId) {
+        return Orders + "/" + orderId;
+    }
+
 
 }

@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.*;
 
 public class GetUserOrders extends BaseTest {
 
-    private String authToken;
+    private static String authToken;
 
     @BeforeClass
     public void setUp() {
@@ -23,12 +23,13 @@ public class GetUserOrders extends BaseTest {
     }
 
     @Test
-    public void testGetOrdersSuccessfullyWithoutFilters() {
+    public static Response testGetOrdersSuccessfullyWithoutFilters() {
         Response response = Methods.GetMethod(Orders, authToken);
 
         assertThat(response.statusCode(), equalTo(200));
         assertThat(response.path("success"), equalTo(true));
         assertThat(response.path("data"), notNullValue());
+        return response;
     }
 
     @Test
