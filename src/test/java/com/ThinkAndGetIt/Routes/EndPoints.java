@@ -36,4 +36,9 @@ public class EndPoints extends BaseTest {
     }
 
 
+    public static String getReturnOrderEndpoint(String orderId) {
+        return Orders + "/" + orderId + "/return"; // Matches: /orders/{id}/return
+    }
+
+
 }

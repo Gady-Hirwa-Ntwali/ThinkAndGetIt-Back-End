@@ -46,4 +46,10 @@ public class Payloads {
         return payload;
     }
 
+    public static HashMap<String, Object> returnOrderPayload(String reason) {
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("reason", reason); // Matches "reason" request body requirement
+        return payload;
+    }
+
 }
