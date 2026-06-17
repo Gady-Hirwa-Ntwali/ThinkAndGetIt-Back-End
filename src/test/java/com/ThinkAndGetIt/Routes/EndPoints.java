@@ -38,12 +38,15 @@ public class EndPoints extends BaseTest {
 
 
     public static String getReturnOrderEndpoint(String orderId) {
-        return Orders + "/" + orderId + "/return"; // Matches: /orders/{id}/return
+        return Orders + "/" + orderId + "/return";
     }
 
     public static String getPaymentProofEndpoint(String orderId) {
-        return Orders + "/" + orderId + "/payment-proof"; // Matches: /orders/{id}/payment-proof
+        return Orders + "/" + orderId + "/payment-proof";
     }
 
+    public static String getAdminUpdateStatusEndpoint(String orderId) {
+        return "orders/admin/" + orderId + "/status"; // Matches: /orders/admin/{id}/status
+    }
 
 }

@@ -52,4 +52,12 @@ public class Payloads {
         return payload;
     }
 
+    public static HashMap<String, Object> updateOrderStatusPayload(String status, String message, String trackingNumber) {
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("status", status); // Matches "status" field
+        payload.put("message", message); // Matches "message" field
+        payload.put("trackingNumber", trackingNumber); // Matches "trackingNumber" field
+        return payload;
+    }
+
 }
