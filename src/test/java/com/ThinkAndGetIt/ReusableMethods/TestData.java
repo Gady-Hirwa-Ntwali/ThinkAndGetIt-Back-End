@@ -146,4 +146,13 @@ public class TestData extends BaseTest {
         return queryParams;
     }
 
+    public static Map<String, Object> getAdminOrdersQueryParams(int page, String status) {
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("page", page); // Matches "page" parameter
+        if (status != null && !status.isEmpty()) {
+            queryParams.put("status", status); // Matches "status" parameter
+        }
+        return queryParams;
+    }
+
 }

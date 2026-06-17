@@ -26,6 +26,7 @@ public class EndPoints extends BaseTest {
     public static final String CONTROL_NAME = "avatar";
     public static final String Orders = "orders";
    public static final String SingleOrder = Orders + "/" + dynamicOrderId;
+    public static final String AdminAllOrders = "orders/admin/all"; // Matches: /orders/admin/all
 
     public static String getCancelOrderEndpoint(String orderId) {
         return Orders + "/" + orderId + "/cancel";
