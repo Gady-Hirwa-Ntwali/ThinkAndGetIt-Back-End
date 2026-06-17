@@ -34,14 +34,9 @@ public class RequestOrderReturn extends BaseTest {
 
     @Test
     public void testRequestReturnValidExecutionFlow() {
-        // Build the validation payload through your payloads builder class
         HashMap<String, Object> payload = Payloads.returnOrderPayload("The product size is too small.");
 
-        // Execute via your structured endpoint generator logic
         Response response = Methods.patchMethod(EndPoints.getReturnOrderEndpoint(dynamicOrderId), payload, authToken);
-
-        // Note: Because a return is strictly restricted only to DELIVERED orders,
-        // a 400 Bad Request error is structurally valid if your test order is currently PENDING.
         assertThat(response.statusCode(), anyOf(equalTo(200), equalTo(400)));
 
         if (response.statusCode() == 200) {
@@ -53,7 +48,6 @@ public class RequestOrderReturn extends BaseTest {
     public void testRequestReturnWithoutAuthentication() {
         HashMap<String, Object> payload = Payloads.returnOrderPayload("Defective item.");
 
-        // Call the patched endpoint missing an authenticated session signature block
         Response response = Methods.patchMethod(EndPoints.getReturnOrderEndpoint(dynamicOrderId), payload, "");
 
         assertThat(response.statusCode(), anyOf(equalTo(401), equalTo(403)));
@@ -61,12 +55,9 @@ public class RequestOrderReturn extends BaseTest {
 
     @Test
     public void testRequestReturnWithMissingReasonField() {
-        // Send an invalid/empty reason string value to trigger input validation constraints
         HashMap<String, Object> invalidPayload = Payloads.returnOrderPayload("");
 
         Response response = Methods.patchMethod(EndPoints.getReturnOrderEndpoint(dynamicOrderId), invalidPayload, authToken);
-
-        // The system backend layer should safely deny execution
         assertThat(response.statusCode(), equalTo(400));
         assertThat(response.path("success"), equalTo(false));
     }
@@ -78,7 +69,6 @@ public class RequestOrderReturn extends BaseTest {
 
         Response response = Methods.patchMethod(EndPoints.getReturnOrderEndpoint(nonExistentOrderId), payload, authToken);
 
-        // Assert server throws a 404 resource miss or 400 error cleanly
         assertThat(response.statusCode(), anyOf(equalTo(404), equalTo(400)));
         assertThat(response.path("success"), equalTo(false));
     }

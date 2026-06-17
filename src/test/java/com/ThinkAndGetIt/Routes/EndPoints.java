@@ -40,5 +40,9 @@ public class EndPoints extends BaseTest {
         return Orders + "/" + orderId + "/return"; // Matches: /orders/{id}/return
     }
 
+    public static String getPaymentProofEndpoint(String orderId) {
+        return Orders + "/" + orderId + "/payment-proof"; // Matches: /orders/{id}/payment-proof
+    }
+
 
 }
